@@ -3,40 +3,40 @@ package com.laptrinhjavaweb.mapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.laptrinhjavaweb.dto.BuildingDTO;
+import com.laptrinhjavaweb.entity.BuildingEntity;
 
-public class BuildingMapper implements IGenericMapper<BuildingDTO> {
+public class BuildingMapper implements IGenericMapper<BuildingEntity> {
 
 	@Override
-	public BuildingDTO mapRow(ResultSet result) {
-		BuildingDTO buildingDTO = new BuildingDTO();	
+	public BuildingEntity mapRow(ResultSet result) {
+		BuildingEntity buildingEntity = new BuildingEntity();	
 		try {
-			buildingDTO.setId(result.getLong("id"));
-			buildingDTO.setName(result.getString("name"));
-			buildingDTO.setStreet(result.getString("street"));
-			buildingDTO.setBuildingarea(result.getInt("buildingarea"));
-			buildingDTO.setCarcost(result.getString("carcost"));
-			buildingDTO.setCostdescription(result.getString("costdescription"));
-			buildingDTO.setCostrent(result.getInt("costrent"));
-			buildingDTO.setWard(result.getString("ward"));
-			buildingDTO.setDeposit(result.getString("deposit"));
-			buildingDTO.setDistrict(result.getString("district"));
-			buildingDTO.setElectricitycost(result.getString("electricitycost"));
-			buildingDTO.setManagername(result.getString("managername"));
-			buildingDTO.setManagerphone(result.getString("managerphone"));
-			buildingDTO.setType(result.getString("type"));
-			buildingDTO.setTimerent(result.getString("timerent"));
-			buildingDTO.setTimedecorator(result.getString("timedecorator"));
-			buildingDTO.setStructure(result.getString("structure"));
-			buildingDTO.setServicecost(result.getString("servicecost"));
-			buildingDTO.setPayment(result.getString("payment"));
-			buildingDTO.setOvertimecost(result.getString("overtimecost"));
-			buildingDTO.setNumberOfBasement(result.getInt("numberOfBasement"));
-			buildingDTO.setMotorbikecost(result.getString("motorbikecost"));
+			buildingEntity.setId(result.getLong("id"));
+			buildingEntity.setName(result.getString("name"));
+			buildingEntity.setStreet(result.getString("street"));
+			buildingEntity.setBuildingarea(result.getInt("buildingarea"));
+			buildingEntity.setCarcost(result.getString("carcost"));
+			buildingEntity.setCostdescription(result.getString("costdescription"));
+			buildingEntity.setCostrent(result.getInt("costrent"));
+			buildingEntity.setWard(result.getString("ward"));
+			buildingEntity.setDeposit(result.getString("deposit"));
+			buildingEntity.setDistrict(result.getString("district"));
+			buildingEntity.setElectricitycost(result.getString("electricitycost"));
+			buildingEntity.setManagername(result.getString("managername"));
+			buildingEntity.setManagerphone(result.getString("managerphone"));
+			buildingEntity.setType(result.getString("type"));
+			buildingEntity.setTimerent(result.getString("timerent"));
+			buildingEntity.setTimedecorator(result.getString("timedecorator"));
+			buildingEntity.setStructure(result.getString("structure"));
+			buildingEntity.setServicecost(result.getString("servicecost"));
+			buildingEntity.setPayment(result.getString("payment"));
+			buildingEntity.setOvertimecost(result.getString("overtimecost"));
+			buildingEntity.setNumberOfBasement(result.getInt("numberOfBasement"));
+			buildingEntity.setMotorbikecost(result.getString("motorbikecost"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return buildingDTO;
+		return buildingEntity;
 	}
 
 }

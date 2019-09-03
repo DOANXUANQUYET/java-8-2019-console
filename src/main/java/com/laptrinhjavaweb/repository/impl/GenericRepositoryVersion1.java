@@ -1,7 +1,5 @@
 package com.laptrinhjavaweb.repository.impl;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -12,11 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import com.laptrinhjavaweb.annotation.Table;
 import com.laptrinhjavaweb.mapper.IGenericMapper;
 import com.laptrinhjavaweb.repository.IGennericRepository;
 
-public class GenericRepository<T> implements IGennericRepository<T> {
+public class GenericRepositoryVersion1<T> implements IGennericRepository<T> {
 
 	ResourceBundle resourceBundle = ResourceBundle.getBundle("db");
 	
@@ -97,55 +94,6 @@ public class GenericRepository<T> implements IGennericRepository<T> {
 	public Long insert(String sql, Object... parameters) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-	
-	
-	//-------------------------------------------------------------------------------
-	private Class<T> zClass;
-	
-	public GenericRepository() {
-		Type type = getClass().getGenericSuperclass();
-		ParameterizedType parameterizedType = (ParameterizedType)type;
-		zClass = (Class<T>)parameterizedType.getActualTypeArguments()[0];
-	}
-	
-	public List<T> findAll(IGenericMapper<T> rowMapper,Object... parameters) {
-		String tableName = "";
-		if(zClass.isAnnotationPresent(Table.class)) {
-			Table table = zClass.getAnnotation(Table.class);
-			tableName = table.name();
-		}
-		String sql = "SELECT * FROM " + tableName +" ";
-		List<T> results = new ArrayList<>();
-		Connection connection = null;
-		PreparedStatement statement = null;
-		ResultSet resultSet = null;
-		try {
-			connection = getConnection();
-			statement = connection.prepareStatement(sql);
-			setParameter(statement, parameters);
-			resultSet = statement.executeQuery();
-			while (resultSet.next()) {
-				results.add(rowMapper.mapRow(resultSet));
-			}
-			return results;
-		} catch (SQLException e) {
-			return null;
-		} finally {
-			try {
-				if (resultSet != null) {
-					resultSet.close();
-				}
-				if (statement != null) {
-					statement.close();
-				}
-				if (connection != null) {
-					connection.close();
-				}
-			} catch (SQLException e) {
-				return null;
-			}
-		}
 	}
 
 }

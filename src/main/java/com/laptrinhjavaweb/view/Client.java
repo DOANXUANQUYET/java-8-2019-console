@@ -1,6 +1,6 @@
 package com.laptrinhjavaweb.view;
 
-import com.laptrinhjavaweb.dto.BuildingDTO;
+import com.laptrinhjavaweb.entity.BuildingEntity;
 import com.laptrinhjavaweb.service.IBuildingService;
 import com.laptrinhjavaweb.service.impl.BuildingService;
 
@@ -13,7 +13,7 @@ public class Client {
 		
 		Long id = 3L;
 		
-		BuildingDTO bd = buidingService.findOne(id);
+		BuildingEntity bd = buidingService.findOne(id);
 		
 		System.out.println("id : " + bd.getId());
 		System.out.println("name : "  + bd.getName());
