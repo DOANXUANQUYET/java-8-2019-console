@@ -12,8 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.swing.tree.RowMapper;
+
+import com.laptrinhjavaweb.annotation.Entity;
 import com.laptrinhjavaweb.annotation.Table;
 import com.laptrinhjavaweb.mapper.IGenericMapper;
+import com.laptrinhjavaweb.mapper.ResultSetMapper;
 import com.laptrinhjavaweb.repository.IGennericRepository;
 
 public class GenericRepository<T> implements IGennericRepository<T> {
@@ -65,7 +69,7 @@ public class GenericRepository<T> implements IGennericRepository<T> {
 			setParameter(statement, parameters);
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				results.add(rowMapper.mapRow(resultSet));
+				//results.add(rowMapper.mapRow(resultSet));
 			}
 			return results;
 		} catch (SQLException e) {
@@ -103,32 +107,33 @@ public class GenericRepository<T> implements IGennericRepository<T> {
 	//-------------------------------------------------------------------------------
 	private Class<T> zClass;
 	
+	@SuppressWarnings("unchecked")
 	public GenericRepository() {
 		Type type = getClass().getGenericSuperclass();
 		ParameterizedType parameterizedType = (ParameterizedType)type;
 		zClass = (Class<T>)parameterizedType.getActualTypeArguments()[0];
 	}
 	
-	public List<T> findAll(IGenericMapper<T> rowMapper,Object... parameters) {
+	public List<T> findAll() {
 		String tableName = "";
-		if(zClass.isAnnotationPresent(Table.class)) {
+		//check xem class co phai entity va table
+		if(zClass.isAnnotationPresent(Entity.class) && zClass.isAnnotationPresent(Table.class)) {
 			Table table = zClass.getAnnotation(Table.class);
 			tableName = table.name();
 		}
 		String sql = "SELECT * FROM " + tableName +" ";
 		List<T> results = new ArrayList<>();
+		//tao instanceMapper de map du lieu tu table tra ve
+		ResultSetMapper<T> resultSetMapper = new ResultSetMapper<T>();
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet resultSet = null;
+		
 		try {
 			connection = getConnection();
 			statement = connection.prepareStatement(sql);
-			setParameter(statement, parameters);
 			resultSet = statement.executeQuery();
-			while (resultSet.next()) {
-				results.add(rowMapper.mapRow(resultSet));
-			}
-			return results;
+			return resultSetMapper.mapRow(resultSet, this.zClass);
 		} catch (SQLException e) {
 			return null;
 		} finally {

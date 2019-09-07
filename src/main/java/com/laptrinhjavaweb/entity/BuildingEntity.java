@@ -1,8 +1,12 @@
 package com.laptrinhjavaweb.entity;
 
+import java.util.Date;
+
 import com.laptrinhjavaweb.annotation.Column;
+import com.laptrinhjavaweb.annotation.Entity;
 import com.laptrinhjavaweb.annotation.Table;
 
+@Entity
 @Table(name = "building")
 public class BuildingEntity {
 	
@@ -25,31 +29,31 @@ public class BuildingEntity {
 	private Integer numberOfBasement;
 	
 	@Column(name = "buildingarea")
-	private Integer buildingarea;
+	private Integer buildingArea;
 	
 	@Column(name = "structure")
 	private String structure;
 	
 	@Column(name = "costrent")
-	private Integer costrent;
+	private Integer costRent;
 	
 	@Column(name = "costdescription")
-	private String costdescription;
+	private String costDescription;
 	
 	@Column(name = "servicecost")
-	private String servicecost;
+	private String serviceCost;
 	
 	@Column(name = "carcost")
-	private String carcost;
+	private String carCost;
 	
 	@Column(name = "motorbikecost")
-	private String motorbikecost;
+	private String motorbikeCost;
 	
 	@Column(name = "overtimecost")
-	private String overtimecost;
+	private String overtimeCost;
 	
 	@Column(name = "electricitycost")
-	private String electricitycost;
+	private String electricityCost;
 	
 	@Column(name = "deposit")
 	private String deposit;
@@ -58,19 +62,31 @@ public class BuildingEntity {
 	private String payment;
 	
 	@Column(name = "timerent")
-	private String timerent;
+	private String timeRent;
 	
 	@Column(name = "timedecorator")
-	private String timedecorator;
+	private String timeDecorator;
 	
 	@Column(name = "managername")
-	private String managername;
+	private String managerName;
 	
 	@Column(name = "managerphone")
-	private String managerphone;
+	private String managerPhone;
 	
 	@Column(name = "type")
 	private String type;
+	
+	@Column(name = "createddate")
+	private Date createdDate;
+	
+	@Column(name = "modifieddate")
+	private Date modifiedDate;
+	
+	@Column(name = "createdby")
+	private String createdBy;
+	
+	@Column(name = "modifiedby")
+	private String modifiedBy;
 
 	public String getName() {
 		return name;
@@ -116,16 +132,12 @@ public class BuildingEntity {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public Integer getBuildingArea() {
+		return buildingArea;
 	}
 
-	public Integer getBuildingarea() {
-		return buildingarea;
-	}
-
-	public void setBuildingarea(Integer buildingarea) {
-		this.buildingarea = buildingarea;
+	public void setBuildingArea(Integer buildingArea) {
+		this.buildingArea = buildingArea;
 	}
 
 	public String getStructure() {
@@ -136,60 +148,60 @@ public class BuildingEntity {
 		this.structure = structure;
 	}
 
-	public Integer getCostrent() {
-		return costrent;
+	public Integer getCostRent() {
+		return costRent;
 	}
 
-	public void setCostrent(Integer costrent) {
-		this.costrent = costrent;
+	public void setCostRent(Integer costRent) {
+		this.costRent = costRent;
 	}
 
-	public String getCostdescription() {
-		return costdescription;
+	public String getCostDescription() {
+		return costDescription;
 	}
 
-	public void setCostdescription(String costdescription) {
-		this.costdescription = costdescription;
+	public void setCostDescription(String costDescription) {
+		this.costDescription = costDescription;
 	}
 
-	public String getServicecost() {
-		return servicecost;
+	public String getServiceCost() {
+		return serviceCost;
 	}
 
-	public void setServicecost(String servicecost) {
-		this.servicecost = servicecost;
+	public void setServiceCost(String serviceCost) {
+		this.serviceCost = serviceCost;
 	}
 
-	public String getCarcost() {
-		return carcost;
+	public String getCarCost() {
+		return carCost;
 	}
 
-	public void setCarcost(String carcost) {
-		this.carcost = carcost;
+	public void setCarCost(String carCost) {
+		this.carCost = carCost;
 	}
 
-	public String getMotorbikecost() {
-		return motorbikecost;
+	public String getMotorbikeCost() {
+		return motorbikeCost;
 	}
 
-	public void setMotorbikecost(String motorbikecost) {
-		this.motorbikecost = motorbikecost;
+	public void setMotorbikeCost(String motorbikeCost) {
+		this.motorbikeCost = motorbikeCost;
 	}
 
-	public String getOvertimecost() {
-		return overtimecost;
+	public String getOvertimeCost() {
+		return overtimeCost;
 	}
 
-	public void setOvertimecost(String overtimecost) {
-		this.overtimecost = overtimecost;
+	public void setOvertimeCost(String overtimeCost) {
+		this.overtimeCost = overtimeCost;
 	}
 
-	public String getElectricitycost() {
-		return electricitycost;
+	public String getElectricityCost() {
+		return electricityCost;
 	}
 
-	public void setElectricitycost(String electricitycost) {
-		this.electricitycost = electricitycost;
+	public void setElectricityCost(String electricityCost) {
+		this.electricityCost = electricityCost;
 	}
 
 	public String getDeposit() {
@@ -208,36 +220,40 @@ public class BuildingEntity {
 		this.payment = payment;
 	}
 
-	public String getTimerent() {
-		return timerent;
+	public String getTimeRent() {
+		return timeRent;
 	}
 
-	public void setTimerent(String timerent) {
-		this.timerent = timerent;
+	public void setTimeRent(String timeRent) {
+		this.timeRent = timeRent;
 	}
 
-	public String getTimedecorator() {
-		return timedecorator;
+	public String getTimeDecorator() {
+		return timeDecorator;
 	}
 
-	public void setTimedecorator(String timedecorator) {
-		this.timedecorator = timedecorator;
+	public void setTimeDecorator(String timeDecorator) {
+		this.timeDecorator = timeDecorator;
 	}
 
-	public String getManagername() {
-		return managername;
+	public String getManagerName() {
+		return managerName;
 	}
 
-	public void setManagername(String managername) {
-		this.managername = managername;
+	public void setManagerName(String managerName) {
+		this.managerName = managerName;
 	}
 
-	public String getManagerphone() {
-		return managerphone;
+	public String getManagerPhone() {
+		return managerPhone;
 	}
 
-	public void setManagerphone(String managerphone) {
-		this.managerphone = managerphone;
+	public void setManagerPhone(String managerPhone) {
+		this.managerPhone = managerPhone;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getType() {
@@ -247,6 +263,39 @@ public class BuildingEntity {
 	public void setType(String type) {
 		this.type = type;
 	}
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public Date getModifiedDate() {
+		return modifiedDate;
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+	
 	
 	
 	

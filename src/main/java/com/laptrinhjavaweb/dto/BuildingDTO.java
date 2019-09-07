@@ -1,5 +1,9 @@
 package com.laptrinhjavaweb.dto;
 
+import java.util.Date;
+
+import com.laptrinhjavaweb.annotation.Column;
+
 public class BuildingDTO {
 	
 	private Long id;
@@ -8,200 +12,183 @@ public class BuildingDTO {
 	private String ward;
 	private String district;
 	private Integer numberOfBasement;
-	private Integer buildingarea;
+	private Integer buildingArea;
 	private String structure;
-	private Integer costrent;
-	private String costdescription;
-	private String servicecost;
-	private String carcost;
-	private String motorbikecost;
-	private String overtimecost;
-	private String electricitycost;
+	private Integer costRent;
+	private String costDescription;
+	private String serviceCost;
+	private String carCost;
+	private String motorbikeCost;
+	private String overtimeCost;
+	private String electricityCost;
 	private String deposit;
 	private String payment;
-	private String timerent;
-	private String timedecorator;
-	private String managername;
-	private String managerphone;
+	private String timeRent;
+	private String timeDecorator;
+	private String managerName;
+	private String managerPhone;
 	private String type;
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getStreet() {
-		return street;
-	}
-
-	public void setStreet(String street) {
-		this.street = street;
-	}
-
-	public String getWard() {
-		return ward;
-	}
-
-	public void setWard(String ward) {
-		this.ward = ward;
-	}
-
-	public String getDistrict() {
-		return district;
-	}
-
-	public void setDistrict(String district) {
-		this.district = district;
-	}
-
-	public Integer getNumberOfBasement() {
-		return numberOfBasement;
-	}
-
-	public void setNumberOfBasement(Integer numberOfBasement) {
-		this.numberOfBasement = numberOfBasement;
-	}
-
+	private Date createdDate;
+	private Date modifiedDate;
+	private String createdBy;
+	private String modifiedBy;
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public Integer getBuildingarea() {
-		return buildingarea;
+	public String getName() {
+		return name;
 	}
-
-	public void setBuildingarea(Integer buildingarea) {
-		this.buildingarea = buildingarea;
+	public void setName(String name) {
+		this.name = name;
 	}
-
+	public String getStreet() {
+		return street;
+	}
+	public void setStreet(String street) {
+		this.street = street;
+	}
+	public String getWard() {
+		return ward;
+	}
+	public void setWard(String ward) {
+		this.ward = ward;
+	}
+	public String getDistrict() {
+		return district;
+	}
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+	public Integer getNumberOfBasement() {
+		return numberOfBasement;
+	}
+	public void setNumberOfBasement(Integer numberOfBasement) {
+		this.numberOfBasement = numberOfBasement;
+	}
+	public Integer getBuildingArea() {
+		return buildingArea;
+	}
+	public void setBuildingArea(Integer buildingArea) {
+		this.buildingArea = buildingArea;
+	}
 	public String getStructure() {
 		return structure;
 	}
-
 	public void setStructure(String structure) {
 		this.structure = structure;
 	}
-
-	public Integer getCostrent() {
-		return costrent;
+	public Integer getCostRent() {
+		return costRent;
 	}
-
-	public void setCostrent(Integer costrent) {
-		this.costrent = costrent;
+	public void setCostRent(Integer costRent) {
+		this.costRent = costRent;
 	}
-
-	public String getCostdescription() {
-		return costdescription;
+	public String getCostDescription() {
+		return costDescription;
 	}
-
-	public void setCostdescription(String costdescription) {
-		this.costdescription = costdescription;
+	public void setCostDescription(String costDescription) {
+		this.costDescription = costDescription;
 	}
-
-	public String getServicecost() {
-		return servicecost;
+	public String getServiceCost() {
+		return serviceCost;
 	}
-
-	public void setServicecost(String servicecost) {
-		this.servicecost = servicecost;
+	public void setServiceCost(String serviceCost) {
+		this.serviceCost = serviceCost;
 	}
-
-	public String getCarcost() {
-		return carcost;
+	public String getCarCost() {
+		return carCost;
 	}
-
-	public void setCarcost(String carcost) {
-		this.carcost = carcost;
+	public void setCarCost(String carCost) {
+		this.carCost = carCost;
 	}
-
-	public String getMotorbikecost() {
-		return motorbikecost;
+	public String getMotorbikeCost() {
+		return motorbikeCost;
 	}
-
-	public void setMotorbikecost(String motorbikecost) {
-		this.motorbikecost = motorbikecost;
+	public void setMotorbikeCost(String motorbikeCost) {
+		this.motorbikeCost = motorbikeCost;
 	}
-
-	public String getOvertimecost() {
-		return overtimecost;
+	public String getOvertimeCost() {
+		return overtimeCost;
 	}
-
-	public void setOvertimecost(String overtimecost) {
-		this.overtimecost = overtimecost;
+	public void setOvertimeCost(String overtimeCost) {
+		this.overtimeCost = overtimeCost;
 	}
-
-	public String getElectricitycost() {
-		return electricitycost;
+	public String getElectricityCost() {
+		return electricityCost;
 	}
-
-	public void setElectricitycost(String electricitycost) {
-		this.electricitycost = electricitycost;
+	public void setElectricityCost(String electricityCost) {
+		this.electricityCost = electricityCost;
 	}
-
 	public String getDeposit() {
 		return deposit;
 	}
-
 	public void setDeposit(String deposit) {
 		this.deposit = deposit;
 	}
-
 	public String getPayment() {
 		return payment;
 	}
-
 	public void setPayment(String payment) {
 		this.payment = payment;
 	}
-
-	public String getTimerent() {
-		return timerent;
+	public String getTimeRent() {
+		return timeRent;
 	}
-
-	public void setTimerent(String timerent) {
-		this.timerent = timerent;
+	public void setTimeRent(String timeRent) {
+		this.timeRent = timeRent;
 	}
-
-	public String getTimedecorator() {
-		return timedecorator;
+	public String getTimeDecorator() {
+		return timeDecorator;
 	}
-
-	public void setTimedecorator(String timedecorator) {
-		this.timedecorator = timedecorator;
+	public void setTimeDecorator(String timeDecorator) {
+		this.timeDecorator = timeDecorator;
 	}
-
-	public String getManagername() {
-		return managername;
+	public String getManagerName() {
+		return managerName;
 	}
-
-	public void setManagername(String managername) {
-		this.managername = managername;
+	public void setManagerName(String managerName) {
+		this.managerName = managerName;
 	}
-
-	public String getManagerphone() {
-		return managerphone;
+	public String getManagerPhone() {
+		return managerPhone;
 	}
-
-	public void setManagerphone(String managerphone) {
-		this.managerphone = managerphone;
+	public void setManagerPhone(String managerPhone) {
+		this.managerPhone = managerPhone;
 	}
-
 	public String getType() {
 		return type;
 	}
-
 	public void setType(String type) {
 		this.type = type;
 	}
-	
-	
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+	public Date getModifiedDate() {
+		return modifiedDate;
+	}
+	public void setModifiedDate(Date modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
+	public String getCreatedBy() {
+		return createdBy;
+	}
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+
 	
 	
 

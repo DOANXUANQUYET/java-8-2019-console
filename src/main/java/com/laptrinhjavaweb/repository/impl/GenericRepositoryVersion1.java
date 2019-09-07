@@ -11,9 +11,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import com.laptrinhjavaweb.mapper.IGenericMapper;
+import com.laptrinhjavaweb.mapper.IGenericMapperVersion1;
 import com.laptrinhjavaweb.repository.IGennericRepository;
+import com.laptrinhjavaweb.repository.IGennericRepositoryVersion1;
 
-public class GenericRepositoryVersion1<T> implements IGennericRepository<T> {
+public class GenericRepositoryVersion1<T> implements IGennericRepositoryVersion1<T> {
 
 	ResourceBundle resourceBundle = ResourceBundle.getBundle("db");
 	
@@ -51,7 +53,7 @@ public class GenericRepositoryVersion1<T> implements IGennericRepository<T> {
 	}
 	
 	@Override
-	public List<T> query(String sql, IGenericMapper<T> rowMapper, Object... parameters) {
+	public List<T> query(String sql, IGenericMapperVersion1<T> rowMapper, Object... parameters) {
 		List<T> results = new ArrayList<>();
 		Connection connection = null;
 		PreparedStatement statement = null;

@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import com.laptrinhjavaweb.entity.BuildingEntity;
 
-public class BuildingMapper implements IGenericMapper<BuildingEntity> {
+public class BuildingMapperVersion1 implements IGenericMapperVersion1<BuildingEntity> {
 
 	@Override
 	public BuildingEntity mapRow(ResultSet result) {
@@ -14,25 +14,25 @@ public class BuildingMapper implements IGenericMapper<BuildingEntity> {
 			buildingEntity.setId(result.getLong("id"));
 			buildingEntity.setName(result.getString("name"));
 			buildingEntity.setStreet(result.getString("street"));
-			buildingEntity.setBuildingarea(result.getInt("buildingarea"));
-			buildingEntity.setCarcost(result.getString("carcost"));
-			buildingEntity.setCostdescription(result.getString("costdescription"));
-			buildingEntity.setCostrent(result.getInt("costrent"));
+			buildingEntity.setBuildingArea(result.getInt("buildingarea"));
+			buildingEntity.setCarCost(result.getString("carcost"));
+			buildingEntity.setCostDescription(result.getString("costdescription"));
+			buildingEntity.setCostRent(result.getInt("costrent"));
 			buildingEntity.setWard(result.getString("ward"));
 			buildingEntity.setDeposit(result.getString("deposit"));
 			buildingEntity.setDistrict(result.getString("district"));
-			buildingEntity.setElectricitycost(result.getString("electricitycost"));
-			buildingEntity.setManagername(result.getString("managername"));
-			buildingEntity.setManagerphone(result.getString("managerphone"));
+			buildingEntity.setElectricityCost(result.getString("electricitycost"));
+			buildingEntity.setManagerName(result.getString("managername"));
+			buildingEntity.setManagerPhone(result.getString("managerphone"));
 			buildingEntity.setType(result.getString("type"));
-			buildingEntity.setTimerent(result.getString("timerent"));
-			buildingEntity.setTimedecorator(result.getString("timedecorator"));
+			buildingEntity.setTimeRent(result.getString("timerent"));
+			buildingEntity.setTimeDecorator(result.getString("timedecorator"));
 			buildingEntity.setStructure(result.getString("structure"));
-			buildingEntity.setServicecost(result.getString("servicecost"));
+			buildingEntity.setServiceCost(result.getString("servicecost"));
 			buildingEntity.setPayment(result.getString("payment"));
-			buildingEntity.setOvertimecost(result.getString("overtimecost"));
+			buildingEntity.setOvertimeCost(result.getString("overtimecost"));
 			buildingEntity.setNumberOfBasement(result.getInt("numberOfBasement"));
-			buildingEntity.setMotorbikecost(result.getString("motorbikecost"));
+			buildingEntity.setMotorbikeCost(result.getString("motorbikecost"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
