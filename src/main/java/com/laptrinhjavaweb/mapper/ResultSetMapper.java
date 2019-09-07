@@ -36,7 +36,7 @@ public class ResultSetMapper<T> implements IGenericMapper<T> {
 							//field trong map class trung voi ten column trong table va phai chua gia tri
 							if(column.name().equals(columnName) && columnValue != null) {
 								//convert data (entity, columnName trong entity, columnValue)
-								BeanUtils.setProperty(object, columnName, columnValue);
+								BeanUtils.setProperty(object, field.getName(), columnValue);
 								break;
 							}
 						}
