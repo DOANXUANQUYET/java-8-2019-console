@@ -114,15 +114,18 @@ public class GenericRepository<T> implements IGennericRepository<T> {
 		zClass = (Class<T>)parameterizedType.getActualTypeArguments()[0];
 	}
 	
-	public List<T> findAll() {
+	public List<T> findAll(int offset,int limit, Object... where) {
 		String tableName = "";
 		//check xem class co phai entity va table
 		if(zClass.isAnnotationPresent(Entity.class) && zClass.isAnnotationPresent(Table.class)) {
 			Table table = zClass.getAnnotation(Table.class);
 			tableName = table.name();
 		}
-		String sql = "SELECT * FROM " + tableName +" ";
-		List<T> results = new ArrayList<>();
+		StringBuilder sql = new StringBuilder("SELECT * FROM " + tableName + " A where 1 = 1 ");
+		if(where != null && where.length > 0) {
+			sql.append(where[0]);
+		}
+		sql.append(" limit " + offset + "," + limit);	
 		//tao instanceMapper de map du lieu tu table tra ve
 		ResultSetMapper<T> resultSetMapper = new ResultSetMapper<T>();
 		Connection connection = null;
@@ -131,7 +134,7 @@ public class GenericRepository<T> implements IGennericRepository<T> {
 		
 		try {
 			connection = getConnection();
-			statement = connection.prepareStatement(sql);
+			statement = connection.prepareStatement(sql.toString());
 			resultSet = statement.executeQuery();
 			return resultSetMapper.mapRow(resultSet, this.zClass);
 		} catch (SQLException e) {

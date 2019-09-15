@@ -13,9 +13,16 @@ public class BuildingController {
 //		BuildingDTO buildingModel = new BuildingDTO();
 //		buildingModel.setName("Anh yeu em");
 //		System.out.println(buildingModel.getName());
-		List<BuildingDTO> buildingsBuildingModels = buildingService.findAll();
+		int page = 1;
+		int limit = 2;
+		int offset = (page - 1) * limit;
+//		String name = "tower";
+//		String district = "QUAN_2";
+//		int buildingArea = 650;
+//		int numberOfBasement = 2;
+		List<BuildingDTO> buildingsBuildingModels = buildingService.findAll(offset,limit);
 		for (BuildingDTO building : buildingsBuildingModels) {
-			System.out.println("Name : " + building.getName() + " - District : " + building.getDistrict() +
+			System.out.println("id : "+ building.getId() + " - Name : " + building.getName() + " - District : " + building.getDistrict() +
 					"  - buildingarea : " + building.getBuildingArea() + " - street : " + building.getStreet());
 		}
 
