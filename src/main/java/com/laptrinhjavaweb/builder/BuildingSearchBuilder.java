@@ -23,11 +23,11 @@ public class BuildingSearchBuilder {
 		return district;
 	}
 
-	public int getBuildingArea() {
+	public Integer getBuildingArea() {
 		return buildingArea;
 	}
 
-	public int getNumberOfBasement() {
+	public Integer getNumberOfBasement() {
 		return numberOfBasement;
 	}
 
@@ -36,20 +36,20 @@ public class BuildingSearchBuilder {
 
 		private String name; // required
 		private String district; // required
-		private int buildingArea;
-		private int numberOfBasement;
+		private Integer buildingArea;
+		private Integer numberOfBasement;
 
 		public Builder(String name, String district) {
 			this.name = name;
 			this.district = district;
 		}
 
-		public Builder setBuildingArea(int buildingArea) {
+		public Builder setBuildingArea(Integer buildingArea) {
 			this.buildingArea = buildingArea;
 			return this;
 		}
 
-		public Builder setNumberOfBasement(int numberOfBasement) {
+		public Builder setNumberOfBasement(Integer numberOfBasement) {
 			this.numberOfBasement = numberOfBasement;
 			return this;
 		}

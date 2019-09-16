@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.laptrinhjavaweb.builder.BuildingSearchBuilder;
 import com.laptrinhjavaweb.converter.BuildingConverter;
 import com.laptrinhjavaweb.dto.BuildingDTO;
+import com.laptrinhjavaweb.paging.Pageable;
 import com.laptrinhjavaweb.repository.impl.BuildingRepository;
 import com.laptrinhjavaweb.service.IBuildingService;
 
@@ -20,7 +22,7 @@ public class BuildingService implements IBuildingService {
 	}
 
 	@Override
-	public List<BuildingDTO> findAll(int offset,int limit) {
+	public List<BuildingDTO> findAll(BuildingSearchBuilder fieldSearch, Pageable pageable) {
 		// java 7
 
 //		List<BuildingDTO> results = new ArrayList<>();
@@ -32,12 +34,18 @@ public class BuildingService implements IBuildingService {
 //		return results;
 
 		// java 8
-		Map<String, Object> maps = new HashMap<String, Object>();
-		maps.put("name","tower");
-		maps.put("district","QUAN_2");
-		maps.put("buildingArea",650);
-		maps.put("numberOfBasement",2);
-		return  buildingRepository.findAll(maps,offset,limit).stream()
+		//map buider seach vao trong Hashmap , su dung co findAll ben duoi,
+		
+		//where simple se di vao findAll chung, where dac biet se di vao findAll cua tung doi tuong,
+		//vi du vao findAll cua building, hoac findAll cua user....
+		Map<String, Object> properties = new HashMap<String, Object>();
+		properties.put("name",fieldSearch.getName());
+		properties.put("district",fieldSearch.getDistrict());
+		properties.put("buildingArea",fieldSearch.getBuildingArea());
+		properties.put("numberOfBasement",fieldSearch.getNumberOfBasement());
+		
+		// search sau do, convert ket qua entity tra ve qua dto
+		return  buildingRepository.findAll(properties,pageable).stream()
 				.map(item -> buildingConverter.convertToDTO(item)).collect(Collectors.toList());
 	}
 

@@ -10,14 +10,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.swing.tree.RowMapper;
+
+import org.apache.commons.lang.StringUtils;
 
 import com.laptrinhjavaweb.annotation.Entity;
 import com.laptrinhjavaweb.annotation.Table;
 import com.laptrinhjavaweb.mapper.IGenericMapper;
 import com.laptrinhjavaweb.mapper.ResultSetMapper;
+import com.laptrinhjavaweb.paging.Pageable;
 import com.laptrinhjavaweb.repository.IGennericRepository;
 
 public class GenericRepository<T> implements IGennericRepository<T> {
@@ -114,18 +118,22 @@ public class GenericRepository<T> implements IGennericRepository<T> {
 		zClass = (Class<T>)parameterizedType.getActualTypeArguments()[0];
 	}
 	
-	public List<T> findAll(int offset,int limit, Object... where) {
+	public List<T> findAll(Map<String, Object> properties, Pageable pageable, Object... where) {
 		String tableName = "";
 		//check xem class co phai entity va table
 		if(zClass.isAnnotationPresent(Entity.class) && zClass.isAnnotationPresent(Table.class)) {
 			Table table = zClass.getAnnotation(Table.class);
 			tableName = table.name();
 		}
+		//tao sql, xac dinh table can tim kiem
 		StringBuilder sql = new StringBuilder("SELECT * FROM " + tableName + " A where 1 = 1 ");
+		//them simple where vao sql, nhung dieu kien chung voi tat ca doi tuong
+		sql = createSQLfindAll(properties, sql);
+		//them where dac biet, nhung dieu kien rieng cua tung doi tuong
 		if(where != null && where.length > 0) {
 			sql.append(where[0]);
 		}
-		sql.append(" limit " + offset + "," + limit);	
+		sql.append(" limit " + pageable.getOffset() + "," + pageable.getLimit());	
 		//tao instanceMapper de map du lieu tu table tra ve
 		ResultSetMapper<T> resultSetMapper = new ResultSetMapper<T>();
 		Connection connection = null;
@@ -154,6 +162,36 @@ public class GenericRepository<T> implements IGennericRepository<T> {
 				return null;
 			}
 		}
+	}
+	
+	//cong them vao cau sql phan where don gian, chung cho moi doi tuong tim kiem
+	private StringBuilder createSQLfindAll(Map<String, Object> properties, StringBuilder updateSQL) {
+		//--------------------------------------vip code---------------------------------------------------	
+		//mang phai co it nhat 1 key tim kiem
+		if(properties != null && properties.size() > 0) {
+			//mang 1 chua cac key thuoc tinh
+			String[] keys = new String[properties.size()];			
+			//mang 2 chua gia tri thuoc tinh
+			Object[] values = new Object[properties.size()];
+			//lay key va value tuong ung trong params tim kiem truyen vao
+			int index = 0;
+			for(Map.Entry<String, Object> entry : properties.entrySet()) {
+				keys[index] = entry.getKey();
+				values[index] = entry.getValue();
+				index++;
+			}
+			
+			for(int i = 0; i < keys.length; i++) {
+				if(values[i] instanceof String && StringUtils.isNotBlank((String) values[i])) {
+					updateSQL.append(" AND LOWER( A." + keys[i] + ") LIKE '%" + values[i] + "%'");
+				}else if(values[i] instanceof Integer && values[i] != null) {
+					updateSQL.append(" AND LOWER( A." + keys[i] + ") = " + values[i] + "");
+				}else if(values[i] instanceof Long && values[i] != null) {
+					updateSQL.append(" AND LOWER( A." + keys[i] + ") = " + values[i] + "");
+				}
+			}
+		}
+		return updateSQL;
 	}
 
 }
