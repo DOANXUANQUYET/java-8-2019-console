@@ -4,8 +4,9 @@ import java.util.Date;
 
 import com.laptrinhjavaweb.annotation.Column;
 
-public class BuildingDTO extends BaseDTO {
+public class BuildingDTO {
 	
+	private Long id;
 	private String name;
 	private String street;
 	private String ward;
@@ -27,7 +28,16 @@ public class BuildingDTO extends BaseDTO {
 	private String managerName;
 	private String managerPhone;
 	private String type;
-
+	private Date createdDate;
+	private Date modifiedDate;
+	private String createdBy;
+	private String modifiedBy;
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -153,6 +163,35 @@ public class BuildingDTO extends BaseDTO {
 	}
 	public void setType(String type) {
 		this.type = type;
-	}	
+	}
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+	public Date getModifiedDate() {
+		return modifiedDate;
+	}
+	public void setModifiedDate(Date modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
+	public String getCreatedBy() {
+		return createdBy;
+	}
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+
+	
+	
+
+		
 
 }
