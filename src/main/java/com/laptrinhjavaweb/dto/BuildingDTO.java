@@ -1,18 +1,13 @@
 package com.laptrinhjavaweb.dto;
 
-import java.util.Date;
-
-import com.laptrinhjavaweb.annotation.Column;
-
-public class BuildingDTO {
+public class BuildingDTO extends BaseDTO {
 	
-	private Long id;
 	private String name;
 	private String street;
 	private String ward;
 	private String district;
-	private Integer numberOfBasement;
-	private Integer buildingArea;
+	private String numberOfBasement;
+	private String buildingArea;
 	private String structure;
 	private Integer costRent;
 	private String costDescription;
@@ -27,17 +22,13 @@ public class BuildingDTO {
 	private String timeDecorator;
 	private String managerName;
 	private String managerPhone;
-	private String type;
-	private Date createdDate;
-	private Date modifiedDate;
-	private String createdBy;
-	private String modifiedBy;
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+	private String[] buildingTypes = new String[] {};
+	private String costRentFrom;
+	private String costRentTo;
+	private String areaRentFrom;
+	private String areaRentTo;
+	private String staffId;
+
 	public String getName() {
 		return name;
 	}
@@ -62,16 +53,16 @@ public class BuildingDTO {
 	public void setDistrict(String district) {
 		this.district = district;
 	}
-	public Integer getNumberOfBasement() {
+	public String getNumberOfBasement() {
 		return numberOfBasement;
 	}
-	public void setNumberOfBasement(Integer numberOfBasement) {
+	public void setNumberOfBasement(String numberOfBasement) {
 		this.numberOfBasement = numberOfBasement;
 	}
-	public Integer getBuildingArea() {
+	public String getBuildingArea() {
 		return buildingArea;
 	}
-	public void setBuildingArea(Integer buildingArea) {
+	public void setBuildingArea(String buildingArea) {
 		this.buildingArea = buildingArea;
 	}
 	public String getStructure() {
@@ -158,40 +149,41 @@ public class BuildingDTO {
 	public void setManagerPhone(String managerPhone) {
 		this.managerPhone = managerPhone;
 	}
-	public String getType() {
-		return type;
+	public String[] getBuildingTypes() {
+		return buildingTypes;
 	}
-	public void setType(String type) {
-		this.type = type;
+	public void setBuildingTypes(String[] buildingTypes) {
+		this.buildingTypes = buildingTypes;
 	}
-	public Date getCreatedDate() {
-		return createdDate;
+	public String getCostRentFrom() {
+		return costRentFrom;
 	}
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
+	public void setCostRentFrom(String costRentFrom) {
+		this.costRentFrom = costRentFrom;
 	}
-	public Date getModifiedDate() {
-		return modifiedDate;
+	public String getCostRentTo() {
+		return costRentTo;
 	}
-	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
+	public void setCostRentTo(String costRentTo) {
+		this.costRentTo = costRentTo;
 	}
-	public String getCreatedBy() {
-		return createdBy;
+	public String getAreaRentFrom() {
+		return areaRentFrom;
 	}
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
+	public void setAreaRentFrom(String areaRentFrom) {
+		this.areaRentFrom = areaRentFrom;
 	}
-	public String getModifiedBy() {
-		return modifiedBy;
+	public String getAreaRentTo() {
+		return areaRentTo;
 	}
-	public void setModifiedBy(String modifiedBy) {
-		this.modifiedBy = modifiedBy;
+	public void setAreaRentTo(String areaRentTo) {
+		this.areaRentTo = areaRentTo;
 	}
-
-	
-	
-
-		
+	public String getStaffId() {
+		return staffId;
+	}
+	public void setStaffId(String staffId) {
+		this.staffId = staffId;
+	}
 
 }

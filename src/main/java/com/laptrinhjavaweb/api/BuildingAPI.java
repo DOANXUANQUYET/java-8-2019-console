@@ -15,6 +15,7 @@ import com.laptrinhjavaweb.dto.BuildingDTO;
 import com.laptrinhjavaweb.paging.PageRequest;
 import com.laptrinhjavaweb.paging.Pageable;
 import com.laptrinhjavaweb.service.impl.BuildingService;
+import com.laptrinhjavaweb.utils.FormUtil;
 import com.laptrinhjavaweb.utils.HttpUtil;
 
 @WebServlet(urlPatterns = {"/api-building"})
@@ -38,7 +39,7 @@ public class BuildingAPI extends HttpServlet {
 		ObjectMapper mapper = new ObjectMapper();
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
-		BuildingDTO building =  HttpUtil.of(request.getReader()).toModel(BuildingDTO.class);
+		BuildingDTO building =  FormUtil.toModel(BuildingDTO.class, request);
 		//map vao builder phan trang
 		Pageable pageable = new PageRequest(building.getPage(), building.getLimit());
 		
@@ -46,11 +47,18 @@ public class BuildingAPI extends HttpServlet {
 		BuildingSearchBuilder buildingSearchBuilder = new BuildingSearchBuilder.Builder(building.getName(), building.getDistrict())
 				.setBuildingArea(building.getBuildingArea())
 				.setNumberOfBasement(building.getNumberOfBasement())
+				.setWard(building.getWard())
+				.setBuildingTypes(building.getBuildingTypes())
+				.setAreaRentFrom(building.getAreaRentFrom())
+				.setAreaRentTo(building.getAreaRentTo())
+				.setCostRentFrom(building.getCostRentFrom())
+				.setCostRentTo(building.getCostRentTo())
+				.setStaffId(building.getStaffId())
 				.build();
 		
 		//search buiding duoi DB
-		List<BuildingDTO> buildingsBuildingModels = buildingService.findAll(buildingSearchBuilder,pageable);
-		mapper.writeValue(response.getOutputStream(), buildingsBuildingModels);
+		List<BuildingDTO> buildingModels = buildingService.findAll(buildingSearchBuilder,pageable);
+		mapper.writeValue(response.getOutputStream(), buildingModels);
 	}
 	
 	@Override
