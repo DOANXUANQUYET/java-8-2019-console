@@ -31,6 +31,7 @@ public class BuildingAPI extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
 		BuildingDTO building =  HttpUtil.of(request.getReader()).toModel(BuildingDTO.class);
+		building = buildingService.insert(building);
 		mapper.writeValue(response.getOutputStream(), building);
 	}
 	
@@ -62,12 +63,22 @@ public class BuildingAPI extends HttpServlet {
 	}
 	
 	@Override
-	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
+		String[]  idString =  request.getParameterValues("id");
+		int cnt = buildingService.delete(idString);
+		mapper.writeValue(response.getOutputStream(), cnt);
 	}
 	
 	@Override
-	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
+		BuildingDTO building =  HttpUtil.of(request.getReader()).toModel(BuildingDTO.class);
+		building = buildingService.update(building);
+		mapper.writeValue(response.getOutputStream(), building);
 	}
 }

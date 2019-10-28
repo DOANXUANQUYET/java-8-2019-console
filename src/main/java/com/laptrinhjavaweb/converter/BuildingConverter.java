@@ -11,5 +11,10 @@ public class BuildingConverter {
 		ModelMapper modelMapper = new ModelMapper();
 		return modelMapper.map(buildingEntity,BuildingDTO.class);
 	}
+	
+	public BuildingEntity convertToEntity(BuildingDTO buildingDTO) {
+		ModelMapper modelMapper = new ModelMapper();
+		return modelMapper.map(buildingDTO,BuildingEntity.class);
+	}
 
 }

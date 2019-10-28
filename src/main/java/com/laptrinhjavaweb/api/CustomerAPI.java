@@ -17,6 +17,7 @@ import com.laptrinhjavaweb.paging.Pageable;
 import com.laptrinhjavaweb.service.ICustomerService;
 import com.laptrinhjavaweb.service.impl.CustomerService;
 import com.laptrinhjavaweb.utils.FormUtil;
+import com.laptrinhjavaweb.utils.HttpUtil;
 
 @WebServlet(urlPatterns = {"/api-customer"})
 public class CustomerAPI extends HttpServlet{
@@ -43,7 +44,32 @@ public class CustomerAPI extends HttpServlet{
 		}
 		
 		@Override
-		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		super.doPost(req, resp);
+		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			ObjectMapper mapper = new ObjectMapper();
+			request.setCharacterEncoding("UTF-8");
+			response.setContentType("application/json");
+			CustomerDTO customer =  HttpUtil.of(request.getReader()).toModel(CustomerDTO.class);
+			customer = customerService.insert(customer);
+			mapper.writeValue(response.getOutputStream(), customer);
+		}
+		
+		@Override
+		protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			ObjectMapper mapper = new ObjectMapper();
+			request.setCharacterEncoding("UTF-8");
+			response.setContentType("application/json");
+			CustomerDTO customerDTO =  HttpUtil.of(request.getReader()).toModel(CustomerDTO.class);
+			customerDTO = customerService.update(customerDTO);
+			mapper.writeValue(response.getOutputStream(), customerDTO);
+		}
+		
+		@Override
+		protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			ObjectMapper mapper = new ObjectMapper();
+			request.setCharacterEncoding("UTF-8");
+			response.setContentType("application/json");
+			String[]  idString =  request.getParameterValues("id");
+			int cnt = customerService.delete(idString);
+			mapper.writeValue(response.getOutputStream(), cnt);
 		}
 }

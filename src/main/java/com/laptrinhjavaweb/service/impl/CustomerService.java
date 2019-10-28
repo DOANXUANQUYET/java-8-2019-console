@@ -1,6 +1,7 @@
 package com.laptrinhjavaweb.service.impl;
 
 import java.lang.reflect.Field;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.apache.commons.lang.StringUtils;
 import com.laptrinhjavaweb.builder.CustomerSearchBuilder;
 import com.laptrinhjavaweb.converter.CustomerConvert;
 import com.laptrinhjavaweb.dto.CustomerDTO;
+import com.laptrinhjavaweb.entity.CustomerEntity;
 import com.laptrinhjavaweb.paging.Pageable;
 import com.laptrinhjavaweb.repository.impl.CustomerRepository;
 import com.laptrinhjavaweb.service.ICustomerService;
@@ -51,6 +53,38 @@ public class CustomerService implements ICustomerService{
 		}
 		return properties;
 
+	}
+
+	@Override
+	public CustomerDTO findById(Long id) {
+		CustomerEntity customerEntity = customerRepository.findById(id);
+		return customerConvert.convertToDTO(customerEntity);
+	}
+
+	@Override
+	public CustomerDTO insert(CustomerDTO customerDTO) {
+		CustomerEntity customerEntity = customerConvert.convertToEntity(customerDTO);
+		customerEntity.setCreatedDate(new Date());
+		customerEntity.setCreatedBy("quyet dep trai");
+		Long id = customerRepository.insert(customerEntity);
+		return customerConvert.convertToDTO(customerRepository.findById(id));
+	}
+
+	@Override
+	public CustomerDTO update(CustomerDTO customerDTO) {
+		CustomerEntity customerEntity = customerConvert.convertToEntity(customerDTO);
+		customerEntity.setModifiedDate(new Date());
+		customerEntity.setModifiedBy("quyet dep trai part 2");
+		Long isSuccess = customerRepository.update(customerEntity);
+		if(isSuccess > 0) {
+			return customerConvert.convertToDTO(customerRepository.findById(customerDTO.getId()));
+		}
+		return new CustomerDTO();
+	}
+
+	@Override
+	public int delete(String[] idString) {
+		return customerRepository.delete(idString);
 	}
 
 }

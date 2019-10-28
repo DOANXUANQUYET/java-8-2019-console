@@ -8,4 +8,10 @@ import com.laptrinhjavaweb.paging.Pageable;
 
 public interface IBuildingService {
 	List<BuildingDTO> findAll(BuildingSearchBuilder builder,Pageable pageable);
+	BuildingDTO findById(Long id);
+	BuildingDTO insert(BuildingDTO buildingDTO);
+	BuildingDTO update(BuildingDTO buildingDTO);
+	int delete(String[] idString);
+	
+	
 }

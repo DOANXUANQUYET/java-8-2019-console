@@ -1,6 +1,7 @@
 package com.laptrinhjavaweb.service.impl;
 
 import java.lang.reflect.Field;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.apache.commons.lang.StringUtils;
 import com.laptrinhjavaweb.builder.BuildingSearchBuilder;
 import com.laptrinhjavaweb.converter.BuildingConverter;
 import com.laptrinhjavaweb.dto.BuildingDTO;
+import com.laptrinhjavaweb.entity.BuildingEntity;
 import com.laptrinhjavaweb.paging.Pageable;
 import com.laptrinhjavaweb.repository.impl.BuildingRepository;
 import com.laptrinhjavaweb.service.IBuildingService;
@@ -33,16 +35,6 @@ public class BuildingService implements IBuildingService {
 	}
 
 	private Map<String, Object> convertToMapProperties(BuildingSearchBuilder fieldSearch) {
-		// java 7
-
-//		List<BuildingDTO> results = new ArrayList<>();
-//		List<BuildingEntity> buildingEntities = buildingRepository.findAll(offset,limit);
-//		for (BuildingEntity item : buildingEntities) {
-//			BuildingDTO buildingDTO = buildingConverter.convertToDTO(item);
-//			results.add(buildingDTO);
-//		}
-//		return results;
-
 		// java 8
 		// map buider seach vao trong Hashmap , su dung co findAll ben duoi,
 
@@ -50,18 +42,6 @@ public class BuildingService implements IBuildingService {
 		// tung doi tuong,
 		// vi du vao findAll cua building, hoac findAll cua user....
 		Map<String, Object> properties = new HashMap<String, Object>();
-
-		/*
-		 * properties.put("name",fieldSearch.getName());
-		 * properties.put("district",fieldSearch.getDistrict());
-		 * if(StringUtils.isNotBlank(fieldSearch.getBuildingArea())) {
-		 * properties.put("buildingArea",Integer.parseInt(fieldSearch.getBuildingArea())
-		 * ); } if(StringUtils.isNotBlank(fieldSearch.getNumberOfBasement())) {
-		 * properties.put("numberOfBasement",Integer.parseInt(fieldSearch.
-		 * getNumberOfBasement())); }
-		 */
-
-		// -------------------auto-------------------
 		try {
 			Field[] fields = BuildingSearchBuilder.class.getDeclaredFields();
 			for (Field field : fields) {
@@ -88,5 +68,37 @@ public class BuildingService implements IBuildingService {
 		}
 		return properties;
 
+	}
+
+	@Override
+	public BuildingDTO findById(Long id) {
+		BuildingEntity buildingEntity = buildingRepository.findById(id);
+		return buildingConverter.convertToDTO(buildingEntity);
+	}
+
+	@Override
+	public BuildingDTO insert(BuildingDTO buildingDTO) {
+		BuildingEntity buildingEntity = buildingConverter.convertToEntity(buildingDTO);
+		buildingEntity.setCreatedDate(new Date());
+		buildingEntity.setCreatedBy("quyet dep trai");
+		Long id = buildingRepository.insert(buildingEntity);
+		return buildingConverter.convertToDTO(buildingRepository.findById(id));
+	}
+
+	@Override
+	public BuildingDTO update(BuildingDTO buildingDTO) {
+		BuildingEntity buildingEntity = buildingConverter.convertToEntity(buildingDTO);
+		buildingEntity.setModifiedDate(new Date());
+		buildingEntity.setModifiedBy("quyet dep trai part 2");
+		Long isSuccess = buildingRepository.update(buildingEntity);
+		if(isSuccess > 0) {
+			return buildingConverter.convertToDTO(buildingRepository.findById(buildingDTO.getId()));
+		}
+		return new BuildingDTO();		
+	}
+
+	@Override
+	public int delete(String[] idString) {
+		return buildingRepository.delete(idString);
 	}
 }
