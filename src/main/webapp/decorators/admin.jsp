@@ -62,5 +62,6 @@
 	<!-- page specific plugin scripts -->
 	<script src="<c:url value='/template/admin/assets/js/jquery-ui.min.js'/>"></script>
 	<script src="<c:url value='/template/js/building-list.js'/>"></script>
+	<script src="<c:url value='/template/js/building-edit.js'/>"></script>
 </body>
 </html>
