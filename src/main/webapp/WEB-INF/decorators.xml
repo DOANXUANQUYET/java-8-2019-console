@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/decorators">
+<!--  thiet lap path(duong dan) cac file can dung se o trong thu muc /decorator -->
+    <excludes> <!-- exclude (loai tru) khong apply template -->
+        <pattern>/api*</pattern>
+    </excludes>   
+    <decorator name="web" page="admin.jsp">
+        <pattern>/*</pattern>
+    </decorator>
+    
+    <decorator name="login" page="login.jsp">
+        <pattern>/dang-nhap</pattern>
+    </decorator>
+</decorators>

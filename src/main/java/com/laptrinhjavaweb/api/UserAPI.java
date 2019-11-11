@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.laptrinhjavaweb.dto.CustomerDTO;
 import com.laptrinhjavaweb.dto.UserDTO;
 import com.laptrinhjavaweb.service.impl.UserService;
 import com.laptrinhjavaweb.utils.HttpUtil;
