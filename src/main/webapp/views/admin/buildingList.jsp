@@ -78,11 +78,9 @@
 															class="form-control" id="district" name="district">
 															<option value="" disabled selected>--- Chọn Quận
 																---</option>
-															<option>Liên Chiểu</option>
-															<option>Thủ Đức</option>
-															<option>Đống Đa</option>
-															<option>Hải Châu</option>
-															<option>Ba Đình</option>
+															<c:forEach var="item" items="${district}">
+																<option value="${item.key}">${item.value}</option>
+															</c:forEach>
 														</select>
 													</div>
 												</div>
@@ -170,15 +168,13 @@
 											<div class="col-xs-12" style="margin: 20px 0;">
 												<div class="form-group">
 													<div class="col-sm-9">
-														<label class='checkbox-inline'><input
-															type="checkbox" value="TANG＿TRET" 　id="buildingTypes"
-															name="buildingTypes">Tầng trệt</label> <label
-															class='checkbox-inline'><input type="checkbox"
-															value="NGUYEN_CAN" id="buildingTypes"
-															name="buildingTypes">Nguyên căn</label> <label
-															class='checkbox-inline'><input type="checkbox"
-															value="NOI_THAT" id="buildingTypes" name="buildingTypes">Nội
-															thất</label> <input type="hidden" name="action" value="LIST">
+														<c:forEach var="item" items="${buildingTypesModal}">
+															<label class='checkbox-inline'> <input
+																type="checkbox" value="${item.key}" id="buildingTypes"
+																name="buildingTypes"> ${item.value}
+															</label>
+														</c:forEach>
+														<input type="hidden" name="action" value="LIST">
 													</div>
 												</div>
 											</div>
@@ -227,6 +223,7 @@
 									<th>Số điện thoại</th>
 									<th>Diện tích sàn</th>
 									<th>Giá thuê</th>
+									<th>Loại tòa nhà</th>
 									<th>Phí dịch vụ</th>
 									<th>Thao Tác</th>
 								</tr>
@@ -236,11 +233,12 @@
 								<c:forEach var="item" items="${buildingModels}">
 									<tr>
 										<td>${item.name}</td>
-										<td>${item.street}</td>
+										<td>${item.address}</td>
 										<td>${item.managerName}</td>
 										<td>${item.managerPhone}</td>
 										<td>${item.buildingArea}</td>
 										<td>${item.costRent}</td>
+										<td>${item.buildingTypesDiscription}</td>
 										<td>000</td>
 										<td>
 											<button class="btn btn-xs" data-toggle="tooltip"

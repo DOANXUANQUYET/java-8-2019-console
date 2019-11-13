@@ -14,14 +14,17 @@ import com.laptrinhjavaweb.builder.BuildingSearchBuilder;
 import com.laptrinhjavaweb.dto.BuildingDTO;
 import com.laptrinhjavaweb.paging.PageRequest;
 import com.laptrinhjavaweb.paging.Pageable;
+import com.laptrinhjavaweb.service.ILoadDataCommonService;
 import com.laptrinhjavaweb.service.impl.BuildingService;
+import com.laptrinhjavaweb.service.impl.LoadDataComonService;
 import com.laptrinhjavaweb.utils.FormUtil;
 
 @WebServlet(urlPatterns = { "/building-list" })
 public class BuildingControllerList extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	static private BuildingService buildingService = new BuildingService();
+	 private BuildingService buildingService = new BuildingService();
+	 private ILoadDataCommonService loadDataCommonService = new LoadDataComonService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -49,6 +52,8 @@ public class BuildingControllerList extends HttpServlet {
 			url = "/views/admin/buildingEdit.jsp";
 		}
 		// map vao builder phan trang
+		request.setAttribute("district", loadDataCommonService.loadDistrict());
+		request.setAttribute("buildingTypesModal", loadDataCommonService.loadBuildingTypes());
 		RequestDispatcher rd = request.getRequestDispatcher(url);
 		rd.forward(request, response);
 

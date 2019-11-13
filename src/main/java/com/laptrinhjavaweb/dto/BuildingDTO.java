@@ -28,6 +28,8 @@ public class BuildingDTO extends BaseDTO {
 	private String areaRentFrom;
 	private String areaRentTo;
 	private String staffId;
+	private String address;
+	private String buildingTypesDiscription;
 
 	public String getName() {
 		return name;
@@ -185,5 +187,18 @@ public class BuildingDTO extends BaseDTO {
 	public void setStaffId(String staffId) {
 		this.staffId = staffId;
 	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getBuildingTypesDiscription() {
+		return buildingTypesDiscription;
+	}
+	public void setBuildingTypesDiscription(String buildingTypesDiscription) {
+		this.buildingTypesDiscription = buildingTypesDiscription;
+	}
+	
 
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -126,14 +127,12 @@
 										for="form-field-1"> Loại tòa nhà </label>
 
 									<div class="col-sm-9">
-										<label class='checkbox-inline'><input type="checkbox"
-											value="TANG＿TRET" 　id="buildingTypes" name="buildingTypes">Tầng
-											trệt</label> <label class='checkbox-inline'><input
-											type="checkbox" value="NGUYEN_CAN" id="buildingTypes"
-											name="buildingTypes">Nguyên căn</label> <label
-											class='checkbox-inline'><input type="checkbox"
-											value="NOI_THAT" id="buildingTypes" name="buildingTypes">Nội
-											thất</label>
+										<c:forEach var="item" items="${buildingTypesModal}">
+											<label class='checkbox-inline'> <input
+												type="checkbox" value="${item.key}" id="buildingTypes"
+												name="buildingTypes"> ${item.value}
+											</label>
+										</c:forEach>
 									</div>
 								</div>
 								<div class="form-group">
