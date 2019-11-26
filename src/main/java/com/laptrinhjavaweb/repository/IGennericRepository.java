@@ -7,10 +7,11 @@ import com.laptrinhjavaweb.paging.Pageable;
 
 public interface IGennericRepository<T> {
 	List<T> findAll(Map<String, Object> properties, Pageable pageable, Object... where);
-	List<T> findAll(String sql, Pageable pageable, Object... where);
+	List<T> findAll(String sql, Pageable pageable);
 	Long update(T updateEntity);
 	Long insert(T insertEntity);
 	int delete(String[] idString);
 	T findById(Long id);
+	public int countAll(String sql);
 	
 }

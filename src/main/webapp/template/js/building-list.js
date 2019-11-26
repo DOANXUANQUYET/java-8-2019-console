@@ -7,5 +7,6 @@ function openAssigmentBuilding() {
 
 $('#searchBuilding').click(function(e) {
 	e.preventDefault();
+	$('#mode').val('SEARCH');
 	$('#buildingForm').submit();
 });

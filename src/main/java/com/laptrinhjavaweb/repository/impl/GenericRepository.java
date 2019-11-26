@@ -189,7 +189,7 @@ public class GenericRepository<T> implements IGennericRepository<T> {
 	}
 
 	@Override
-	public List<T> findAll(String sql, Pageable pageable, Object... where) {
+	public List<T> findAll(String sql, Pageable pageable) {
 		StringBuilder sqlSearch = new StringBuilder(sql);
 		// them simple where vao sql, nhung dieu kien chung voi tat ca doi tuong
 		sqlSearch.append(" limit " + pageable.getOffset() + "," + pageable.getLimit());
@@ -201,7 +201,7 @@ public class GenericRepository<T> implements IGennericRepository<T> {
 
 		try {
 			connection = getConnection();
-			statement = connection.prepareStatement(sql.toString());
+			statement = connection.prepareStatement(sqlSearch.toString());
 			resultSet = statement.executeQuery();
 			return resultSetMapper.mapRow(resultSet, this.zClass);
 		} catch (SQLException e) {
@@ -219,6 +219,40 @@ public class GenericRepository<T> implements IGennericRepository<T> {
 				}
 			} catch (SQLException e) {
 				return new ArrayList<>();
+			}
+		}
+	}
+	
+	public int countAll(String sql) {
+		// tao instanceMapper de map du lieu tu table tra ve
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+
+		try {
+			connection = getConnection();
+			statement = connection.prepareStatement(sql);
+			resultSet = statement.executeQuery();
+			int cnt = 0;
+			 while(resultSet.next()){
+			        cnt = resultSet.getInt("countPage");
+			   }
+			return cnt;
+		} catch (SQLException e) {
+			return 0;
+		} finally {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+				if (statement != null) {
+					statement.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				return 0;
 			}
 		}
 	}

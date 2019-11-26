@@ -41,7 +41,7 @@
 		</a> <b class="arrow"></b>
 			<ul class="submenu">
 				<li><a
-					href='<c:url value="/building-list?action=LIST"/>'>
+					href='<c:url value="/building-list?action=LIST&mode=SEARCH"/>'>
 						<i class="menu-icon fa fa-caret-right"></i> Tìm kiếm tòa nhà
 				</a> <b class="arrow"></b></li>
 			</ul></li>

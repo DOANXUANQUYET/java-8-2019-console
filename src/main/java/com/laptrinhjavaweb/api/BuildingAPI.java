@@ -3,6 +3,7 @@ package com.laptrinhjavaweb.api;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -74,11 +75,13 @@ public class BuildingAPI extends HttpServlet {
 	
 	@Override
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ObjectMapper mapper = new ObjectMapper();
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
 		BuildingDTO building =  HttpUtil.of(request.getReader()).toModel(BuildingDTO.class);
 		building = buildingService.update(building);
-		mapper.writeValue(response.getOutputStream(), building);
+		String url = "/views/admin/buildingEdit.jsp";
+		request.setAttribute("building", building);
+		RequestDispatcher rd = request.getRequestDispatcher(url);
+		rd.forward(request, response);
 	}
 }

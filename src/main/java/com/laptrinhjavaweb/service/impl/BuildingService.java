@@ -101,4 +101,10 @@ public class BuildingService implements IBuildingService {
 	public int delete(String[] idString) {
 		return buildingRepository.delete(idString);
 	}
+
+	@Override
+	public int countAll(BuildingSearchBuilder fieldSearch) {
+		Map<String, Object> properties = convertToMapProperties(fieldSearch);
+		return buildingRepository.countAll(properties, fieldSearch);
+	}
 }

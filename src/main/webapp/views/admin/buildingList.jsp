@@ -189,6 +189,10 @@
 												</span>
 											</div>
 										</div>
+										<input type="hidden" value="" id="limit" name="limit" /> <input
+											type="hidden" value="" id="page" name="page" /> <input
+											type="hidden" value="" id="totalPage" name="totalPage" /> <input
+											type="hidden" value="" id="mode" name="mode" />
 									</form>
 								</div>
 							</div>
@@ -224,7 +228,7 @@
 									<th>Diện tích sàn</th>
 									<th>Giá thuê</th>
 									<th>Loại tòa nhà</th>
-									<th>Phí dịch vụ</th>
+									<th>Mô tả</th>
 									<th>Thao Tác</th>
 								</tr>
 							</thead>
@@ -239,7 +243,7 @@
 										<td>${item.buildingArea}</td>
 										<td>${item.costRent}</td>
 										<td>${item.buildingTypesDiscription}</td>
-										<td>000</td>
+										<td>${item.costDescription}</td>
 										<td>
 											<button class="btn btn-xs" data-toggle="tooltip"
 												title="Xóa tòa nhà" onclick="assigmentBuilding()">
@@ -250,6 +254,7 @@
 								</c:forEach>
 							</tbody>
 						</table>
+						<ul class="pagination" id="pagination"></ul>
 					</div>
 				</div>
 				<!-- /.row -->
@@ -297,9 +302,29 @@
 				</div>
 				<div class="modal-footer"></div>
 			</div>
-
 		</div>
 	</div>
+	<script>
+		var totalPages = ${pageModel.totalPage};
+		var currentPage = ${pageModel.page};
+		var limit = ${pageModel.limit};
+		$(function() {
+			window.pagObj = $('#pagination').twbsPagination({
+				totalPages : totalPages,
+				visiblePages : 3,
+				startPage : currentPage,
+				onPageClick : function(event, page) {
+					if (currentPage != page) {
+						$('#totalPage').val(totalPages);
+						$('#limit').val(limit);
+						$('#page').val(page);
+						$('#mode').val('PAGING');
+						$('#buildingForm').submit();
+					}
+				}
+			});
+		});
+	</script>
 </body>
 
 </html>

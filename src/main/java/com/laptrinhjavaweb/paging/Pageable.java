@@ -7,5 +7,10 @@ public interface Pageable {
 	Integer getLimit();
 
 	Integer getOffset();
+	
+	void setTotalPageByRow(Integer rows);
+	
+	void setTotalPage(Integer totalPage);
+	
 
 }

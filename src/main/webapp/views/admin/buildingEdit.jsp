@@ -88,11 +88,29 @@
 								</div>
 								<div class="form-group">
 									<label class="col-sm-3 control-label no-padding-right"
+										for="form-field-1"> Mô tả </label>
+
+									<div class="col-sm-9">
+										<input type="text" id="costDescription" class="form-control"
+											name="costDescription">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right"
 										for="form-field-1"> Hướng </label>
 
 									<div class="col-sm-9">
 										<input type="text" id="structure" class="form-control"
 											name='structure'>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right"
+										for="form-field-1"> Phường </label>
+
+									<div class="col-sm-9">
+										<input type="text" id="ward" class="form-control"
+											name="ward">
 									</div>
 								</div>
 								<div class="form-group">
@@ -122,6 +140,21 @@
 											name="managerName">
 									</div>
 								</div>
+								<div class="col-xs-12" style="margin-top: 10px;">
+									<div class="col-xs-12 col-sm-4">
+										<div class="form-group">
+											<label for="exampleFormControlSelect1">Quận hiện
+												có</label> <select style="width: 50%; heigh: 80%"
+												class="form-control" id="district" name="district">
+												<option value="" disabled selected>--- Chọn Quận
+													---</option>
+												<c:forEach var="item" items="${district}">
+													<option value="${item.key}">${item.value}</option>
+												</c:forEach>
+											</select>
+										</div>
+									</div>
+								</div>
 								<div class="form-group">
 									<label class="col-sm-3 control-label no-padding-right"
 										for="form-field-1"> Loại tòa nhà </label>
@@ -147,6 +180,40 @@
 								</div>
 							</form>
 						</div>
+					</div>
+				</div>
+				<!-- /.row -->
+				<br />
+				<div class="row">
+					<div class="col-xs-12">
+						<table id="simple-table"
+							class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>Tên sản phẩm</th>
+									<th>Địa chỉ</th>
+									<th>Tên quản lí</th>
+									<th>Số điện thoại</th>
+									<th>Diện tích sàn</th>
+									<th>Giá thuê</th>
+									<th>Loại tòa nhà</th>
+									<th>Mô tả</th>
+								</tr>
+							</thead>
+
+							<tbody>
+									<tr>
+										<td>${building.name}</td>
+										<td>${building.address}</td>
+										<td>${building.managerName}</td>
+										<td>${building.managerPhone}</td>
+										<td>${building.buildingArea}</td>
+										<td>${building.costRent}</td>
+										<td>${building.buildingTypesDiscription}</td>
+										<td>${building.costDescription}</td>
+									</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 				<!-- /.row -->

@@ -27,6 +27,18 @@ public class BuildingRepository extends GenericRepository<BuildingEntity> implem
 		return this.findAll(sqlSearch.toString(),pageable);
 	}
 	
+	@Override
+	public int countAll(Map<String, Object> properties, BuildingSearchBuilder fieldSearch) {
+		StringBuilder sqlSearch = new StringBuilder("SELECT count(*) AS countPage FROM building A ");
+		if(StringUtils.isNotBlank(fieldSearch.getStaffId())) {
+			sqlSearch.append("INNER JOIN assignmentstaff assignstaff ON A.id = assignstaff.buildingid ");
+		}
+		sqlSearch.append("WHERE 1 = 1 ");
+		sqlSearch = this.createSQLfindAll(properties, sqlSearch);
+		sqlSearch.append(buildSqlSpecial(fieldSearch));
+		return this.countAll(sqlSearch.toString());
+	}
+	
 	//-----------------------------------------------------------INSERT DATA ------------------------------------------------------------
 	
 	
